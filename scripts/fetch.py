@@ -32,9 +32,9 @@ def init(argsp):
 
 
 def log_status(index, pmc_id, num_groups):
-    print("{:.3%}".format(1. * index / num_groups) + ' | '
+    print("\r{:.3%}".format(1. * index / num_groups) + ' | '
           + str(index) + '/' + str(num_groups) + ' | '
-          + os.path.basename(pmc_id))
+          + os.path.basename(pmc_id), end='')
 
 
 def extract_image_info(line, image_dir):
