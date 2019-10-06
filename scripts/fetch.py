@@ -347,6 +347,7 @@ if __name__ == '__main__':
     
 #     groups = groups[i:j]
     groups = dict(groups.items(), start=i, stop=j)
+    print(len(groups.keys()))
     num_groups = len(groups)
     provide_extraction_dir()
 
