@@ -344,10 +344,13 @@ if __name__ == '__main__':
         
     i = args.start_index
     j = args.end_index
-    
+    print(f'Downloading from {i} to {j}')
 #     groups = groups[i:j]
-    groups = dict(groups.items(), start=i, stop=j)
-    print(len(groups.keys()))
+#     groups = dict(groups.items(), start=i, stop=j)
+    keys = list(groups.keys())[i:j]
+    groups = {key:item for key, item in groups if key in keys}
+    
+    print(f'Total no.of groups in this part: {len(groups)}' )
     num_groups = len(groups)
     provide_extraction_dir()
 
