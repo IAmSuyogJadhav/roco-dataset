@@ -11,6 +11,7 @@ import tarfile
 import tempfile
 import urllib.request
 import xml.etree.ElementTree as ET
+from itertools import islice
 
 tempfile.gettempdir()
 
@@ -344,7 +345,8 @@ if __name__ == '__main__':
     i = args.start_index
     j = args.end_index
     
-    groups = groups[i:j]
+#     groups = groups[i:j]
+    groups = dict(groups.items(), start=i, stop=j)
     num_groups = len(groups)
     provide_extraction_dir()
 
