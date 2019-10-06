@@ -290,7 +290,7 @@ def parse_args():
     parser.add_argument(
         '-j', '--end-index',
         help='The index to end at + 1',
-        default=46599,
+        default=46598,
         type=int,
     )
     
