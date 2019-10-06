@@ -340,7 +340,7 @@ if __name__ == '__main__':
         groups_ = pickle.load(open('groups.pkl', 'rb'))
     else:
         groups_ = group_lines_by_archive(lines)
-        pickle.dump(groups, open('groups.pkl', 'wb'))
+        pickle.dump(groups_, open('groups.pkl', 'wb'))
         
     i = args.start_index
     j = args.end_index
