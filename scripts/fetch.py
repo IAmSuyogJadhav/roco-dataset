@@ -337,9 +337,9 @@ if __name__ == '__main__':
                                                   + '/..'))
     lines = collect_dlinks_lines()
     if args.pickle_file_available:
-        groups = pickle.load(open('groups.pkl', 'rb'))
+        groups_ = pickle.load(open('groups.pkl', 'rb'))
     else:
-        groups = group_lines_by_archive(lines)
+        groups_ = group_lines_by_archive(lines)
         pickle.dump(groups, open('groups.pkl', 'wb'))
         
     i = args.start_index
@@ -347,8 +347,8 @@ if __name__ == '__main__':
     print(f'Downloading from {i} to {j}')
 #     groups = groups[i:j]
 #     groups = dict(groups.items(), start=i, stop=j)
-    keys = list(groups.keys())[i:j]
-    groups = {key:item for key, item in groups if key in keys}
+    keys = list(groups_.keys())[i:j]
+    groups = {key:item for key, item in groups_.items() if key in keys}
     
     print(f'Total no.of groups in this part: {len(groups)}' )
     num_groups = len(groups)
