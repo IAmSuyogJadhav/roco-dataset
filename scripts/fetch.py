@@ -1,5 +1,5 @@
 """ Download packages and extract images based on dlinks.txt files. """
-
+import pickle
 import argparse
 import glob
 import multiprocessing
@@ -268,12 +268,32 @@ def parse_args():
     )
 
     parser.add_argument(
+        '-p', '--pickle-file-available',
+        help='Use the pickle file in the current folder.',
+        action='store_true',
+    )
+    
+    parser.add_argument(
         '-k', '--keep-archives',
         help='keep downloaded archives after extraction. Ensure sufficient '
              + 'available disk space at the extraction directory location',
         action='store_true',
     )
+    
+    parser.add_argument(
+        '-i', '--start-index',
+        help='The index to start from',
+        default=0,
+        type=int,
+    )
 
+    parser.add_argument(
+        '-j', '--end-index',
+        help='The index to end at + 1',
+        default=46598,
+        type=int,
+    )
+    
     parser.add_argument(
         '-n', '--num-processes',
         help='number of parallel processes, reduce this if you are being '
@@ -315,7 +335,16 @@ if __name__ == '__main__':
     dataset_dir = os.path.dirname(os.path.abspath(os.path.realpath(sys.argv[0])
                                                   + '/..'))
     lines = collect_dlinks_lines()
-    groups = group_lines_by_archive(lines)
+    if args.pickle_file_available:
+        groups = pickle.load(open('groups.pkl', 'rb'))
+    else:
+        groups = group_lines_by_archive(lines)
+        pickle.dump(groups, open('groups.pkl', 'wb'))
+        
+    i = args.start_index
+    j = args.end_index
+    
+    groups = groups[i:j]
     num_groups = len(groups)
     provide_extraction_dir()
 
